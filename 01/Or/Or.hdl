@@ -3,7 +3,7 @@ CHIP Or {
     OUT out;
 
     PARTs:
-    Nand(a=a, b=a, out=c)
-    Nand(a=b, b=b, out=d)
-    Nand(a=c, b=d, out=out)
+    Nand(a=a, b=a, out=c);
+    Nand(a=b, b=b, out=d);
+    Nand(a=c, b=d, out=out);
 }
