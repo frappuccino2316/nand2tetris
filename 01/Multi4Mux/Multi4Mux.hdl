@@ -1,0 +1,25 @@
+CHIP Multi4Mux {
+    IN a, b, c, d, sel[2];
+    OUT out;
+    
+    PARTS:
+    Not(in=sel[0], out=notsel0);
+    Not(in=sel[1], out=notsel1);
+
+    And(a=a, b=notsel1, out=middlea);
+    And(a=middlea, b=notsel0, out=finala);
+
+    And(a=b, b=notsel1, out=middleb);
+    And(a=middleb, b=sel[0], out=finalb);
+
+    And(a=c, b=sel[1], out=middlec);
+    And(a=middlec, b=notsel0, out=finalc);
+
+    And(a=d, b=sel[1], out=middled);
+    And(a=middled, b=sel[0], out=finald);
+
+    Or(a=finala, b=finalb, out=anb);
+    Or(a=finalc, b=finald, out=cnd);
+
+    Or(a=anb, b=cnd, out=out);
+}
