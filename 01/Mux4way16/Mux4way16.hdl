@@ -1,4 +1,4 @@
-CHIP Multi4Mux {
+CHIP Mux4way16 {
     /**
     * 00ならaを出力
     * 01ならbを出力
