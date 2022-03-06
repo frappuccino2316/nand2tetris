@@ -1,0 +1,9 @@
+CHIP Multi4Or {
+    IN a, b, c, d;
+    OUT out;
+    
+    PARTS:
+    Or(a=a, b=b, out=e);
+    Or(a=c, b=d, out=f);
+    Or(a=e, b=f, out=out);
+}
