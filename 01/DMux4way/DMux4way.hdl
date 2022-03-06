@@ -1,0 +1,15 @@
+CHIP DMux4way {
+    /**
+    * 00ならin, 0, 0, 0を出力
+    * 01なら0, in, 0, 0を出力
+    * 10なら0, 0, in, 0を出力
+    * 11なら0, 0, 0, inを出力
+    */
+    IN in, sel[2];
+    OUT a, b, c, d;
+    
+    PARTS:
+    DMux(in=in, sel=sel[1], a=r1, b=r2);
+    DMux(in=r1, sel=sel[0], a=a, b=b);
+    DMux(in=r2, sel=sel[0], a=c, b=d);
+}
