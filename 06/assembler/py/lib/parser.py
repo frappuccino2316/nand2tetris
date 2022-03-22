@@ -1,13 +1,13 @@
+from constants import A_COMMAND, C_COMMAND, L_COMMAND
+
+
 class Parser:
     def __init__(self, input_path):
         self.lines = []
-        self.line_counter = 0
-        self.current_command = self.lines[0]
 
         with open(input_path) as f:
             raw_contents = f.read()
             splitted_lines = raw_contents.replace(" ", "").splitlines()
-
             for line in splitted_lines:
                 if line[0:2] == "//" or line.isspace() or line == "":
                     continue
@@ -16,8 +16,11 @@ class Parser:
                     line = line[:index]
                 self.lines.append(line)
 
+        self.line_counter = 0
+        self.current_command = self.lines[0]
+
     def has_more_command(self):
-        return self.lines.length - 1 >= self.line_counter
+        return len(self.lines) >= self.line_counter
 
     def advance(self):
         if self.has_more_command() == False:
