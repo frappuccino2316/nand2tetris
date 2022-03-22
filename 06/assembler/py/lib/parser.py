@@ -1,11 +1,11 @@
-from constants import A_COMMAND, C_COMMAND, L_COMMAND
+from .constants import A_COMMAND, C_COMMAND, L_COMMAND
 
 
 class Parser:
     def __init__(self, input_path):
         self.lines = []
 
-        with open(input_path) as f:
+        with open(input_path, "r", encoding="utf-8") as f:
             raw_contents = f.read()
             splitted_lines = raw_contents.replace(" ", "").splitlines()
             for line in splitted_lines:
@@ -20,7 +20,7 @@ class Parser:
         self.current_command = self.lines[0]
 
     def has_more_command(self):
-        return len(self.lines) >= self.line_counter
+        return len(self.lines) - 1 > self.line_counter
 
     def advance(self):
         if self.has_more_command() == False:
@@ -50,11 +50,11 @@ class Parser:
         if ";" not in self.current_command:
             return self.current_command.split("=")[1]
         else:
-            return None
+            return "null"
 
     def jump(self):
         index = self.current_command.find(";")
         if index != -1:
             return self.current_command[index:]
         else:
-            return None
+            return "null"
