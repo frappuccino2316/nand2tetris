@@ -27,7 +27,6 @@ def main():
             jump = code.jump(jump_mnemonic)
             machine_code.append("111" + comp + dest + jump)
         elif parser.command_type() == A_COMMAND:
-            # machine_code.append(bin(int(parser.symbol())).split("b")[1])
             binary = bin(int(parser.symbol())).split("b")[1].zfill(16)
             machine_code.append(binary)
         parser.advance()

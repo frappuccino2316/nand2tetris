@@ -20,14 +20,15 @@ class Parser:
         self.current_command = self.lines[0]
 
     def has_more_command(self):
-        return len(self.lines) - 1 > self.line_counter
+        return len(self.lines) > self.line_counter
 
     def advance(self):
         if self.has_more_command() == False:
             pass
         self.line_counter += 1
-        new_command = self.lines[self.line_counter]
-        self.current_command = new_command
+        if self.has_more_command():
+            new_command = self.lines[self.line_counter]
+            self.current_command = new_command
 
     def command_type(self):
         if self.current_command.find("@") == 0:
