@@ -1,8 +1,3 @@
-A_COMMAND = "A_COMMAND"
-C_COMMAND = "C_COMMAND"
-L_COMMAND = "L_COMMAND"
-
-
 class Parser:
     def __init__(self, input_path):
         self.lines = []
