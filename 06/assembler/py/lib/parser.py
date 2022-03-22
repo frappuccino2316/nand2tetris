@@ -11,6 +11,9 @@ class Parser:
             for line in splitted_lines:
                 if line[0:2] == "//" or line.isspace() or line == "":
                     continue
+                if "//" in line:
+                    index = line.find("//")
+                    line = line[:index]
                 deleted_comment_lines.append(line)
 
             return "\n".join(deleted_comment_lines)
