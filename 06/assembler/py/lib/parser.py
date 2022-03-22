@@ -30,3 +30,11 @@ class Parser:
         self.line_counter += 1
         new_command = self.lines[self.line_counter]
         self.current_command = new_command
+
+    def command_type(self):
+        if self.current_command.find("@") == 0:
+            return A_COMMAND
+        elif self.current_command.find("(") == 0:
+            return L_COMMAND
+        else:
+            return C_COMMAND
