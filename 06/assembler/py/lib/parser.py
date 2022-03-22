@@ -44,3 +44,19 @@ class Parser:
             return self.current_command.split("@")[1]
         else:
             return self.current_command[0:-1]
+
+    def dest(self):
+        return self.current_command.split("=")[0]
+
+    def comp(self):
+        if ";" not in self.current_command:
+            return self.current_command.split("=")[1]
+        else:
+            return None
+
+    def jump(self):
+        index = self.current_command.find(";")
+        if index != -1:
+            return self.current_command[index:]
+        else:
+            return None
