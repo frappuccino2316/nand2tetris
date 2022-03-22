@@ -53,11 +53,11 @@ jump_dict = {
 
 
 class Code():
-    def comp(mnemonic):
+    def comp(self, mnemonic):
         return comp_dict[mnemonic]
 
-    def dest(mnemonic):
+    def dest(self, mnemonic):
         return dest_dict[mnemonic]
 
-    def jump(mnemonic):
+    def jump(self, mnemonic):
         return jump_dict[mnemonic]
