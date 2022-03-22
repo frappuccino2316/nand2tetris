@@ -38,3 +38,9 @@ class Parser:
             return L_COMMAND
         else:
             return C_COMMAND
+
+    def symbol(self):
+        if self.command_type() == A_COMMAND:
+            return self.current_command.split("@")[1]
+        else:
+            return self.current_command[0:-1]
