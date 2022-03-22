@@ -7,6 +7,7 @@ class Parser:
     def __init__(self, input_path):
         self.lines = []
         self.line_counter = 0
+        self.current_command = self.lines[0]
 
         with open(input_path) as f:
             raw_contents = f.read()
@@ -19,3 +20,13 @@ class Parser:
                     index = line.find("//")
                     line = line[:index]
                 self.lines.append(line)
+
+    def has_more_command(self):
+        return self.lines.length - 1 >= self.line_counter
+
+    def advance(self):
+        if self.has_more_command() == False:
+            pass
+        self.line_counter += 1
+        new_command = self.lines[self.line_counter]
+        self.current_command = new_command
