@@ -50,7 +50,7 @@ def main():
                 if symbol_table.contains(symbol):
                     address = symbol_table.get_address(symbol)
                 else:
-                    address = str(bin(ram_address))
+                    address = str(hex(ram_address))
                     symbol_table.add_entry(symbol, address)
                     ram_address += 1
                 a_code = str(bin(int(address, 16)).split("b")[1]).zfill(16)
