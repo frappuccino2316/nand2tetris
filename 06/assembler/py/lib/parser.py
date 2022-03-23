@@ -51,10 +51,10 @@ class Parser:
             return self.current_command.split("=")[0]
 
     def comp(self):
-        if ";" not in self.current_command:
-            return self.current_command.split("=")[1]
+        if ";" in self.current_command:
+            return self.current_command.split(";")[0]
         else:
-            return "null"
+            return self.current_command.split("=")[1]
 
     def jump(self):
         index = self.current_command.find(";")
