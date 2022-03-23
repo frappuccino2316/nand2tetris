@@ -24,7 +24,7 @@ def main():
         elif parser.command_type() == L_COMMAND:
             symbol = parser.symbol()
             if not symbol_table.contains(symbol):
-                address = str(rom_address).zfill(16)[-6:]
+                address = str(hex(rom_address))
                 symbol_table.add_entry(symbol, address)
 
         parser.advance()
