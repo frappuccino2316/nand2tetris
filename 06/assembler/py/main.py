@@ -3,6 +3,7 @@ from os import path
 
 from lib.parser import Parser
 from lib.code import Code
+from lib.symbol_table import SymbolTable
 from lib.constants import A_COMMAND, C_COMMAND, L_COMMAND
 
 
@@ -13,6 +14,23 @@ def main():
 
     parser = Parser(input_path)
     code = Code()
+    symbol_table = SymbolTable()
+    rom_address = 0
+    ram_address = 16
+
+    while parser.has_more_command():
+        if parser.command_type() == A_COMMAND or parser.command_type() == C_COMMAND:
+            rom_address += 1
+        elif parser.command_type() == L_COMMAND:
+            symbol = parser.symbol()
+            if not symbol_table.contains(symbol):
+                address = str(rom_address).zfill(16)[-6:]
+                symbol_table.add_entry(symbol, address)
+
+        parser.advance()
+
+    parser.line_counter = 0
+    parser.current_command = parser.lines[0]
 
     machine_code = []
 
@@ -27,8 +45,15 @@ def main():
             jump = code.jump(jump_mnemonic)
             machine_code.append("111" + comp + dest + jump)
         elif parser.command_type() == A_COMMAND:
-            binary = bin(int(parser.symbol())).split("b")[1].zfill(16)
-            machine_code.append(binary)
+            symbol = parser.symbol()
+            if symbol_table.contains(symbol):
+                address = symbol_table.get_address(symbol)
+            else:
+                address = "0x" + str(ram_address).zfill(16)[-4:]
+                symbol_table.add_entry(symbol, address)
+                ram_address += 1
+            machine_code.append(str(int(address, 16)).zfill(16))
+
         parser.advance()
 
     with open(output_path, "w", encoding="utf-8") as f:
