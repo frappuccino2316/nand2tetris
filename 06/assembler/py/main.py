@@ -50,13 +50,13 @@ def main():
                 if symbol_table.contains(symbol):
                     address = symbol_table.get_address(symbol)
                 else:
-                    address = "0x" + str(ram_address).zfill(16)[-4:]
+                    address = str(bin(ram_address))
                     symbol_table.add_entry(symbol, address)
                     ram_address += 1
-                machine_code.append(
-                    str(bin(int(address, 16)).split("b")[1]).zfill(16))
+                a_code = str(bin(int(address, 16)).split("b")[1]).zfill(16)
+                machine_code.append(a_code)
             else:
-                binary = str(bin(int(symbol, 16)).split("b")[1]).zfill(16)
+                binary = str(bin(int(symbol))).split("b")[1].zfill(16)
                 machine_code.append(binary)
 
         parser.advance()
