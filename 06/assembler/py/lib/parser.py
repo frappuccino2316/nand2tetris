@@ -42,7 +42,7 @@ class Parser:
         if self.command_type() == A_COMMAND:
             return self.current_command.split("@")[1]
         else:
-            return self.current_command[0:-1]
+            return self.current_command[1:-1]
 
     def dest(self):
         if ";" in self.current_command:
