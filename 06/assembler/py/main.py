@@ -44,15 +44,29 @@ def main():
             comp = code.comp(comp_mnemonic)
             jump = code.jump(jump_mnemonic)
             machine_code.append("111" + comp + dest + jump)
+            print("======")
+            print("C")
+            print("111" + comp + dest + jump)
         elif parser.command_type() == A_COMMAND:
             symbol = parser.symbol()
-            if symbol_table.contains(symbol):
-                address = symbol_table.get_address(symbol)
+            if not symbol.isnumeric():
+                if symbol_table.contains(symbol):
+                    address = symbol_table.get_address(symbol)
+                else:
+                    address = "0x" + str(ram_address).zfill(16)[-4:]
+                    symbol_table.add_entry(symbol, address)
+                    ram_address += 1
+                machine_code.append(
+                    str(bin(int(address, 16)).split("b")[1]).zfill(16))
+                print("======")
+                print("A-1")
+                print(str(bin(int(address, 16)).split("b")[1]).zfill(16))
             else:
-                address = "0x" + str(ram_address).zfill(16)[-4:]
-                symbol_table.add_entry(symbol, address)
-                ram_address += 1
-            machine_code.append(str(int(address, 16)).zfill(16))
+                binary = str(bin(int(symbol, 16)).split("b")[1]).zfill(16)
+                machine_code.append(binary)
+                print("======")
+                print("A-2")
+                print(str(bin(int(symbol, 16)).split("b")[1]).zfill(16))
 
         parser.advance()
 
