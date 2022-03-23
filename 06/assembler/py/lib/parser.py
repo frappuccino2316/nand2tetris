@@ -59,6 +59,6 @@ class Parser:
     def jump(self):
         index = self.current_command.find(";")
         if index != -1:
-            return self.current_command[index:]
+            return self.current_command[index + 1:]
         else:
             return "null"
