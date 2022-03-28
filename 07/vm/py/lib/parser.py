@@ -31,28 +31,28 @@ class Parser:
             self.current_command = new_command
 
     def command_type(self):
-        if "push" in self.lines:
+        if "push" in self.current_command:
             return C_PUSH
-        elif "pop" in self.lines:
+        elif "pop" in self.current_command:
             return C_POP
-        elif "label" in self.lines:
+        elif "label" in self.current_command:
             return C_LABEL
-        elif "goto" in self.lines:
+        elif "goto" in self.current_command:
             return C_GOTO
-        elif "if" in self.lines:
+        elif "if" in self.current_command:
             return C_IF
-        elif "function" in self.lines:
+        elif "function" in self.current_command:
             return C_FUNCTION
-        elif "return" in self.lines:
+        elif "return" in self.current_command:
             return C_RETURN
         else:
             return C_ARITHMETIC
 
     def arg1(self):
         if self.command_type() == C_ARITHMETIC:
-            return self.lines.strip()
+            return self.current_command.strip()
         else:
-            return self.lines.strip().split(" ")[1]
+            return self.current_command.strip().split(" ")[1]
 
     def arg2(self):
-        return self.lines.strip().split(" ")[2]
+        return self.current_command.strip().split(" ")[2]
