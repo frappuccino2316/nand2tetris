@@ -16,7 +16,10 @@ def main():
         if parser.command_type() == C_PUSH or parser.command_type() == C_POP:
             segment = parser.arg1()
             index = parser.arg2()
-            code_writer.writePushPop(parser.command_type(), segment, index)
+            code_writer.write_push_pop(parser.command_type(), segment, index)
+        elif parser.command_type() == C_ARITHMETIC:
+            command = parser.arg1()
+            code_writer.write_arithmetic(command)
         parser.advance()
 
     code_writer.close()

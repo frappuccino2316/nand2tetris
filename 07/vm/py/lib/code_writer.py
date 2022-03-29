@@ -14,18 +14,28 @@ class CodeWriter:
     def set_file_name(self, file_name):
         self.current_file_name = file_name
 
-    # def write_arithmetic(self, command):
-    #     self.current_file.write('aaa' + '\n')
+    def write_arithmetic(self, command):
+        if command == "add":
+            content = 'D=D+M\n'
 
-    def writePushPop(self, command, segment, index):
+        self.write_pop_to_a()
+        self.current_file.write('D=M\n')
+        self.write_pop_to_a()
+        self.current_file.write(content)
+        self.write_push_from_d()
+
+    def write_push_pop(self, command, segment, index):
         if command == C_PUSH:
             if segment == 'constant':
                 self.current_file.write(f'@{index}')
                 self.current_file.write('M=A\n')
-                self.writePushFromD()
+                self.write_push_from_d()
 
-    def writePushFromD(self):
+    def write_push_from_d(self):
         self.current_file.write('@SP\nM=A\nM=D\n@SP\nM=M+1\n')
+
+    def write_pop_to_a(self):
+        self.current_file.write('@SP\nM=M-1\nA=M\n')
 
     def close(self):
         self.current_file.close()
