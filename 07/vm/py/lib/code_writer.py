@@ -27,7 +27,7 @@ class CodeWriter:
     def write_push_pop(self, command, segment, index):
         if command == C_PUSH:
             if segment == 'constant':
-                self.current_file.write(f'@{index}')
+                self.current_file.write(f'@{index}\n')
                 self.current_file.write('M=A\n')
                 self.write_push_from_d()
 
