@@ -77,7 +77,7 @@ class CodeWriter:
         ])
         self.write_push_from_d()
 
-        self.current_file += 1
+        self.current_label += 1
 
     def write_push_pop(self, command, segment, index):
         if command == C_PUSH:
