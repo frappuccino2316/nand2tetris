@@ -12,7 +12,6 @@ def main():
     code_writer = CodeWriter(input_path)
 
     while parser.has_more_command():
-        print(parser.command_type())
         if parser.command_type() == C_PUSH or parser.command_type() == C_POP:
             segment = parser.arg1()
             index = parser.arg2()
