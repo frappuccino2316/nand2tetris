@@ -71,7 +71,7 @@ class CodeWriter:
             'D=0',
             f'@NExT_{self.current_label}',
             '0;JMP',
-            f'(RETURN_{self.current_label}',
+            f'(RETURN_{self.current_label})',
             'D=-1',
             f'(NEXT_{self.current_label})'
         ])
