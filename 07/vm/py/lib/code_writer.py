@@ -69,7 +69,7 @@ class CodeWriter:
             f'@RETURN_{self.current_label}',
             f'D;{mnemonic}',
             'D=0',
-            f'@NExT_{self.current_label}',
+            f'@NEXT_{self.current_label}',
             '0;JMP',
             f'(RETURN_{self.current_label})',
             'D=-1',
