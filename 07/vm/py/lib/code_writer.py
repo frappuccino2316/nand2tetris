@@ -31,7 +31,7 @@ class CodeWriter:
         if command == 'add':
             content = 'D=D+M'
         elif command == 'sub':
-            content = 'D=D-M'
+            content = 'D=M-D'
         elif command == 'and':
             content = 'D=D&M'
         elif command == 'or':
