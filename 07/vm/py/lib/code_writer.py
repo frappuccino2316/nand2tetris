@@ -102,7 +102,7 @@ class CodeWriter:
             elif segment == 'static':
                 self.write_sentences([
                     'D=M',
-                    f'{self.file_name}.{index}',
+                    f'@{self.file_name}.{index}',
                     'M=D'
                 ])
 
