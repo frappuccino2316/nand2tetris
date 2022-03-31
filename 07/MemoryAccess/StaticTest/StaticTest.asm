@@ -20,13 +20,13 @@ M=D
 @SP
 M=M+1
 D=M
-StaticTest.8
+@StaticTest.8
 M=D
 D=M
-StaticTest.3
+@StaticTest.3
 M=D
 D=M
-StaticTest.1
+@StaticTest.1
 M=D
 @StaticTest.3
 D=M
