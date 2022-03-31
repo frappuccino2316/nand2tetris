@@ -100,6 +100,7 @@ class CodeWriter:
             elif segment in ['pointer', 'temp']:
                 self.write_pop_to_fixed_segment(segment, index)
             elif segment == 'static':
+                self.write_pop_to_a()
                 self.write_sentences([
                     'D=M',
                     f'@{self.file_name}.{index}',
