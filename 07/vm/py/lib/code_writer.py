@@ -94,6 +94,17 @@ class CodeWriter:
                     'D=M'
                 ])
                 self.write_push_from_d()
+        elif command == C_POP:
+            if segment in ['local', 'argument', 'this', 'that']:
+                self.write_pop_to_referenced_segment(segment, index)
+            elif segment in ['pointer', 'temp']:
+                self.write_pop_to_fixed_segment(segment, index)
+            elif segment == 'static':
+                self.write_sentences([
+                    'D=M',
+                    f'{self.file_name}.{index}',
+                    'M=D'
+                ])
 
     def write_push_from_referenced_segment(self, segment, index):
         label = self.get_label_by_segment(segment)
@@ -116,6 +127,34 @@ class CodeWriter:
 
         self.write_sentences(['D=M'])
         self.write_push_from_d()
+
+    def write_pop_to_referenced_segment(self, segment, index):
+        self.write_pop_to_a()
+
+        label = self.get_label_by_segment(segment)
+        self.write_sentences([
+            'D=M',
+            f'@{label}',
+            'A=M'
+        ])
+
+        index_number = int(index)
+        if index_number > 0:
+            self.write_sentences(['A=A+1'] * index_number)
+
+        self.write_sentences(['M=D'])
+
+    def write_pop_to_fixed_segment(self, segment, index):
+        self.write_pop_to_a()
+
+        label = self.get_label_by_segment(segment)
+        self.write_sentences(['D=M', f'@{label}'])
+
+        index_number = int(index)
+        if index > 0:
+            self.write_sentences(['A=A+1'] * index_number)
+
+        self.write_sentences(['M=D'])
 
     def get_label_by_segment(self, segment):
         labels = {
