@@ -151,7 +151,7 @@ class CodeWriter:
         self.write_sentences(['D=M', f'@{label}'])
 
         index_number = int(index)
-        if index > 0:
+        if index_number > 0:
             self.write_sentences(['A=A+1'] * index_number)
 
         self.write_sentences(['M=D'])
