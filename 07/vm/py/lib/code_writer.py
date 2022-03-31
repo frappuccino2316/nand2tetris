@@ -5,9 +5,9 @@ from .constants import C_ARITHMETIC, C_PUSH, C_POP, C_GOTO, C_IF, C_LABEL, C_FUN
 
 class CodeWriter:
     def __init__(self, file_path):
-        file_name = path.basename(file_path).split(".")[0]
+        self.file_name = path.basename(file_path).split(".")[0]
         self.output_path = path.dirname(
-            file_path) + '/' + file_name + '.asm'
+            file_path) + '/' + self.file_name + '.asm'
         self.current_file = open(self.output_path, 'w', encoding='utf-8')
         self.current_file_name = ''
         self.current_label = 0
@@ -84,6 +84,49 @@ class CodeWriter:
             if segment == 'constant':
                 self.write_sentences([f'@{index}', 'D=A'])
                 self.write_push_from_d()
+            elif segment in ['local', 'argument', 'this', 'that']:
+                self.write_push_from_referenced_segment(segment, index)
+            elif segment in ['pointer', 'temp']:
+                self.write_push_from_fixed_segment(segment, index)
+            elif segment == 'static':
+                self.write_sentences([
+                    f'@{self.file_name}.{index}',
+                    'D=M'
+                ])
+                self.write_push_from_d()
+
+    def write_push_from_referenced_segment(self, segment, index):
+        label = self.get_label_by_segment(segment)
+        self.write_sentences([f'@{label}', 'A=M'])
+
+        index_number = int(index)
+        if index_number > 0:
+            self.write_sentences(['A=A+1'] * index_number)
+
+        self.write_sentences(['D=M'])
+        self.write_push_from_d()
+
+    def write_push_from_fixed_segment(self, segment, index):
+        label = self.get_label_by_segment(segment)
+        self.write_sentences([f'@{label}'])
+
+        index_number = int(index)
+        if index_number > 0:
+            self.write_sentences(['A=A+1'] * index_number)
+
+        self.write_sentences(['D=M'])
+        self.write_push_from_d()
+
+    def get_label_by_segment(self, segment):
+        labels = {
+            'local': 'LCL',
+            'argument': 'ARG',
+            'this': 'THIS',
+            'that': 'THAT',
+            'pointer': '3',
+            'temp': '5'
+        }
+        return labels[segment]
 
     def write_push_from_d(self):
         self.write_sentences(['@SP', 'A=M', 'M=D', '@SP', 'M=M+1'])
