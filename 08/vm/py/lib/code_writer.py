@@ -168,12 +168,6 @@ class CodeWriter:
         }
         return labels[segment]
 
-    def write_push_from_d(self):
-        self.write_sentences(['@SP', 'A=M', 'M=D', '@SP', 'M=M+1'])
-
-    def write_pop_to_a(self):
-        self.write_sentences(['@SP', 'M=M-1', 'A=M'])
-
     def write_label(self, label):
         self.write_sentences([f'({label})'])
 
@@ -182,6 +176,20 @@ class CodeWriter:
             f'({label})',
             '0;JMP'
         ])
+
+    def write_if(self, label):
+        self.write_pop_to_a()
+        self.write_sentences([
+            'D=M',
+            f'{label}',
+            'D;JNE'
+        ])
+
+    def write_push_from_d(self):
+        self.write_sentences(['@SP', 'A=M', 'M=D', '@SP', 'M=M+1'])
+
+    def write_pop_to_a(self):
+        self.write_sentences(['@SP', 'M=M-1', 'A=M'])
 
     def close(self):
         self.current_file.close()
