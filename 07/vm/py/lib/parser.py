@@ -7,7 +7,6 @@ class Parser:
 
         with open(input_path, "r", encoding="utf-8") as f:
             raw_contents = f.read()
-            # splitted_lines = raw_contents.replace(" ", "").splitlines()
             splitted_lines = raw_contents.splitlines()
             for line in splitted_lines:
                 if line[0:2] == "//" or line.isspace() or line == "":
