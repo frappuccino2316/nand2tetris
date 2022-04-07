@@ -19,6 +19,15 @@ def main():
         elif parser.command_type() == C_ARITHMETIC:
             command = parser.arg1()
             code_writer.write_arithmetic(command)
+        elif parser.command_type() == C_LABEL:
+            command = parser.arg1()
+            code_writer.write_label(command)
+        elif parser.command_type() == C_GOTO:
+            command = parser.arg1()
+            code_writer.write_label(command)
+        elif parser.command_type() == C_IF:
+            command = parser.arg1()
+            code_writer.write_if(command)
         parser.advance()
 
     code_writer.close()
