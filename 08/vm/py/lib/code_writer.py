@@ -177,5 +177,11 @@ class CodeWriter:
     def write_label(self, label):
         self.write_sentences([f'({label})'])
 
+    def write_goto(self, label):
+        self.write_sentences([
+            f'({label})',
+            '0;JMP'
+        ])
+
     def close(self):
         self.current_file.close()
