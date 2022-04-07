@@ -174,5 +174,8 @@ class CodeWriter:
     def write_pop_to_a(self):
         self.write_sentences(['@SP', 'M=M-1', 'A=M'])
 
+    def write_label(self, label):
+        self.write_sentences([f'({label})'])
+
     def close(self):
         self.current_file.close()
