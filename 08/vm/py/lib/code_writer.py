@@ -1,6 +1,6 @@
 from os import path
 
-from .constants import C_ARITHMETIC, C_PUSH, C_POP, C_GOTO, C_IF, C_LABEL, C_FUNCTION, C_RETURN, C_CALL
+from .constants import C_PUSH, C_POP
 
 
 class CodeWriter:
