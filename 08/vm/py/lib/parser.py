@@ -44,6 +44,10 @@ class Parser:
             return C_FUNCTION
         elif "return" in self.current_command:
             return C_RETURN
+        elif "goto" in self.current_command:
+            return C_GOTO
+        elif "call" in self.current_command:
+            return C_CALL
         else:
             return C_ARITHMETIC
 
