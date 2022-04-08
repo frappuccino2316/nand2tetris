@@ -185,6 +185,63 @@ class CodeWriter:
             'D;JNE'
         ])
 
+    def write_return(self):
+        self.write_sentences([
+            '@LCL',
+            'D=M',
+            '@R13',
+            'M=D',
+            '@5',
+            'D=A',
+            '@R13',
+            'A=M-D',
+            'D=M',
+            '@R14',
+            'M=D'
+        ])
+
+        self.write_pop_to_a()
+
+        self.write_sentences([
+            'D=M',
+            '@ARG',
+            'A=M',
+            'M=D',
+
+            '@ARG',
+            'D=M+1',
+            '@SP',
+            'M=D',
+
+            '@R13',
+            'AM=M-1',
+            'D=M',
+            '@THAT',
+            'M=D',
+
+            '@R13',
+            'AM=M-1',
+            'D=M',
+            '@THIS',
+            'M=D',
+
+            '@R13',
+            'AM=M-1',
+            'D=M',
+            '@ARG',
+            'M=D',
+
+            '@R13',
+            'AM=M-1',
+            'D=M',
+            '@LCL',
+            'M=D',
+
+            '@R14',
+            'A=M',
+            '0;JMP'
+        ])
+
     def write_function(self, function_name, num_locals):
         self.write_sentences([f'({function_name})', 'D=0'])
         for i in range(num_locals):
