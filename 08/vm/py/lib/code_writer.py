@@ -173,7 +173,7 @@ class CodeWriter:
 
     def write_goto(self, label):
         self.write_sentences([
-            f'({label})',
+            f'@{label}',
             '0;JMP'
         ])
 
