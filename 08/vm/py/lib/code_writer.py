@@ -181,7 +181,7 @@ class CodeWriter:
         self.write_pop_to_a()
         self.write_sentences([
             'D=M',
-            f'{label}',
+            f'@{label}',
             'D;JNE'
         ])
 
