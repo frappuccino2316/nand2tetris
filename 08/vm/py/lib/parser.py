@@ -36,8 +36,6 @@ class Parser:
             return C_POP
         elif "label" in self.current_command:
             return C_LABEL
-        elif "goto" in self.current_command:
-            return C_GOTO
         elif "if" in self.current_command:
             return C_IF
         elif "function" in self.current_command:
