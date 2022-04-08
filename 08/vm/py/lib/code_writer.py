@@ -185,6 +185,11 @@ class CodeWriter:
             'D;JNE'
         ])
 
+    def write_function(self, function_name, num_locals):
+        self.write_sentences([f'({function_name})', 'D=0'])
+        for i in range(num_locals):
+            self.write_push_from_d()
+
     def write_push_from_d(self):
         self.write_sentences(['@SP', 'A=M', 'M=D', '@SP', 'M=M+1'])
 
