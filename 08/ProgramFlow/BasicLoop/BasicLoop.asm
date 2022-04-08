@@ -92,7 +92,8 @@ A=M
 M=D
 @SP
 M=M+1
-(LOOP_START)
+@LOOP_START
+0;JMP
 @LCL
 A=M
 D=M
