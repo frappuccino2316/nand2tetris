@@ -11,6 +11,7 @@ class CodeWriter:
         self.current_file = open(self.output_path, 'w', encoding='utf-8')
         self.current_file_name = ''
         self.current_label = 0
+        self.label_for_return_address = 0
 
     def set_file_name(self, file_name):
         self.current_file_name = file_name
@@ -184,6 +185,57 @@ class CodeWriter:
             f'@{label}',
             'D;JNE'
         ])
+
+    def write_call(self, function_name, num_args):
+        self.write_sentences([
+            f'@RETURN_ADDRESS_{self.label_for_return_address}',
+            'D=A'
+        ])
+        self.write_push_from_d()
+
+        self.write_sentences([
+            '@LCL',
+            'D=M',
+        ])
+        self.write_push_from_d()
+
+        self.write_sentences([
+            '@ARG',
+            'D=M',
+        ])
+        self.write_push_from_d()
+
+        self.write_sentences([
+            '@THIS',
+            'D=M',
+        ])
+        self.write_push_from_d()
+
+        self.write_sentences([
+            '@THAT',
+            'D=M',
+        ])
+        self.write_push_from_d()
+
+        self.write_sentences([
+            '@SP',
+            'D=M',
+            f'@{num_args}',
+            'D=D-A',
+            '@5',
+            'D=D-A',
+            '@ARG',
+            'M=D',
+            '@SP',
+            'D=M',
+            '@LCL',
+            'M=D',
+            f'@{function_name}',
+            '0;JMP',
+            f'(RETURN_ADDRESS_{self.label_for_return_address})'
+        ])
+
+        self.label_for_return_address += 1
 
     def write_return(self):
         self.write_sentences([
