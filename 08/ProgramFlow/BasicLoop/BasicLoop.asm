@@ -92,8 +92,12 @@ A=M
 M=D
 @SP
 M=M+1
+@SP
+M=M-1
+A=M
+D=M
 @LOOP_START
-0;JMP
+D;JNE
 @LCL
 A=M
 D=M
