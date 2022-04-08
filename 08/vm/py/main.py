@@ -24,7 +24,7 @@ def main():
             code_writer.write_label(command)
         elif parser.command_type() == C_GOTO:
             command = parser.arg1()
-            code_writer.write_label(command)
+            code_writer.write_goto(command)
         elif parser.command_type() == C_IF:
             command = parser.arg1()
             code_writer.write_if(command)
