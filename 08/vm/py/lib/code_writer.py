@@ -11,6 +11,8 @@ class CodeWriter:
         self.current_label = 0
         self.label_for_return_address = 0
 
+        self.write_init()
+
     def write_init(self):
         self.write_sentences([
             '@256',
