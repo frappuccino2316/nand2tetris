@@ -11,6 +11,15 @@ class CodeWriter:
         self.current_label = 0
         self.label_for_return_address = 0
 
+    def write_init(self):
+        self.write_sentences([
+            '@256',
+            'D=A',
+            '@SP',
+            'M=D'
+        ])
+        self.write_call('Sys.init', 0)
+
     def set_file_name(self, file_name):
         self.current_file_name = file_name
 
