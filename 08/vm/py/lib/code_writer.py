@@ -5,7 +5,7 @@ from .constants import C_PUSH, C_POP
 
 class CodeWriter:
     def __init__(self, file_path):
-        self.output_path = file_path.split('/')[-1] + '.asm'
+        self.output_path = file_path + file_path.split('/')[-1] + '.asm'
         self.current_file = open(self.output_path, 'w', encoding='utf-8')
         self.current_file_name = ''
         self.current_label = 0
