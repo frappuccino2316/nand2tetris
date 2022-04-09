@@ -34,8 +34,8 @@ def main():
         elif parser.command_type() == C_RETURN:
             code_writer.write_return()
         elif parser.command_type() == C_FUNCTION:
-            first_command = parser.arg1
-            second_command = parser.arg2
+            first_command = parser.arg1()
+            second_command = parser.arg2()
             code_writer.write_function(first_command, second_command)
         parser.advance()
 
