@@ -296,7 +296,7 @@ class CodeWriter:
 
     def write_function(self, function_name, num_locals):
         self.write_sentences([f'({function_name})', 'D=0'])
-        for i in range(num_locals):
+        for i in range(int(num_locals)):
             self.write_push_from_d()
 
     def write_push_from_d(self):
