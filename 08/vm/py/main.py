@@ -1,4 +1,5 @@
 import sys
+import glob
 
 from lib.parser import Parser
 from lib.code_writer import CodeWriter
@@ -7,9 +8,17 @@ from lib.constants import C_ARITHMETIC, C_CALL, C_FUNCTION, C_GOTO, C_IF, C_LABE
 
 def main():
     input_path = sys.argv[1]
+    vm_files = glob.glob(f'{input_path}/*.vm')
 
-    parser = Parser(input_path)
     code_writer = CodeWriter(input_path)
+
+    for file in vm_files:
+        translate(code_writer, file)
+
+
+def translate(code_writer, file):
+    parser = Parser(file)
+    code_writer.set_file_name(file)
 
     while parser.has_more_command():
         if parser.command_type() == C_PUSH or parser.command_type() == C_POP:

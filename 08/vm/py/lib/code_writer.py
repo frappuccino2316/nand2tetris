@@ -5,9 +5,7 @@ from .constants import C_PUSH, C_POP
 
 class CodeWriter:
     def __init__(self, file_path):
-        self.file_name = path.basename(file_path).split(".")[0]
-        self.output_path = path.dirname(
-            file_path) + '/' + self.file_name + '.asm'
+        self.output_path = file_path.split('/')[-1] + '.asm'
         self.current_file = open(self.output_path, 'w', encoding='utf-8')
         self.current_file_name = ''
         self.current_label = 0
@@ -91,7 +89,7 @@ class CodeWriter:
                 self.write_push_from_fixed_segment(segment, index)
             elif segment == 'static':
                 self.write_sentences([
-                    f'@{self.file_name}.{index}',
+                    f'@{self.current_file_name}.{index}',
                     'D=M'
                 ])
                 self.write_push_from_d()
@@ -104,7 +102,7 @@ class CodeWriter:
                 self.write_pop_to_a()
                 self.write_sentences([
                     'D=M',
-                    f'@{self.file_name}.{index}',
+                    f'@{self.current_file_name}.{index}',
                     'M=D'
                 ])
 
