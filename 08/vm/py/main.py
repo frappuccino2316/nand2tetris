@@ -38,8 +38,9 @@ def translate(code_writer, file):
             command = parser.arg1()
             code_writer.write_if(command)
         elif parser.command_type() == C_CALL:
-            command = parser.arg1()
-            code_writer.write_call(command)
+            first_command = parser.arg1()
+            second_command = parser.arg2()
+            code_writer.write_call(first_command, second_command)
         elif parser.command_type() == C_RETURN:
             code_writer.write_return()
         elif parser.command_type() == C_FUNCTION:
