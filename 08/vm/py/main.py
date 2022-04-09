@@ -20,7 +20,7 @@ def main():
 
 def translate(code_writer, file):
     parser = Parser(file)
-    code_writer.set_file_name(file)
+    code_writer.set_file_name(file.split('/')[-1])
 
     while parser.has_more_command():
         if parser.command_type() == C_PUSH or parser.command_type() == C_POP:
