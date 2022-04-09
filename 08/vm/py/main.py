@@ -15,6 +15,8 @@ def main():
     for file in vm_files:
         translate(code_writer, file)
 
+    code_writer.close()
+
 
 def translate(code_writer, file):
     parser = Parser(file)
@@ -48,8 +50,6 @@ def translate(code_writer, file):
             second_command = parser.arg2()
             code_writer.write_function(first_command, second_command)
         parser.advance()
-
-    code_writer.close()
 
 
 if __name__ == "__main__":
