@@ -18,7 +18,7 @@ class CodeWriter:
             '@SP',
             'M=D'
         ])
-        self.write_call('Sys.init', 0)
+        self.write_call('Sys.init', '0')
 
     def set_file_name(self, file_name):
         self.current_file_name = file_name
