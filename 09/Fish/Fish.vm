@@ -24,8 +24,10 @@ pop pointer 0
 push this 0
 call Output.printString 1
 pop temp 0
+call Output.println 0
+pop temp 0
 push this 1
-call output.printInt 1
+call Output.printInt 1
 pop temp 0
 push constant 0
 return

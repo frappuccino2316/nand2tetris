@@ -14,7 +14,7 @@ class Fish {
     method void print() {
         do Output.printString(name);
         do Output.println();
-        do output.printInt(size);
+        do Output.printInt(size);
         return;
     }
 }
