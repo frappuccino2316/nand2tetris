@@ -3,7 +3,7 @@ class Main {
         var Fish fish;
         let fish = Fish.new("Maguro", 180);
 
-        do fish.print()
+        do fish.print();
         return;
     }
 }
