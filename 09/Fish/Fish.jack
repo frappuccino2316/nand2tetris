@@ -1,0 +1,18 @@
+class FIsh {
+    field String name;
+    field int size;
+
+    constructor Fish new(String n, int s) {
+        let name = n;
+        let size = s;
+        return this;
+    }
+
+    method String getName() { return name; }
+    method int getSize() { return size; }
+
+    method void print() {
+        do Output.printString(name);
+        do output.printInt(size);
+    }
+}
