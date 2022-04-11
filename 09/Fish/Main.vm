@@ -1,0 +1,23 @@
+function Main.main 1
+push constant 6
+call String.new 1
+push constant 77
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 180
+call Fish.new 2
+pop local 0
+push local 0
+call Fish.print 1
+pop temp 0
+push constant 0
+return
