@@ -1,0 +1,9 @@
+class Main {
+    function void main() {
+        var Fish fish;
+        let fish = Fish.new("Maguro", 180);
+
+        do fish.print()
+        return;
+    }
+}
