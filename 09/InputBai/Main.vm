@@ -1,0 +1,11 @@
+class Main {
+    function void main() {
+        var int number, multi;
+        let number = Keyboard.readInt("What's number? ");
+
+        let multi = number * 2;
+        do Output.printString("The Multiply: ");
+        do Output.printInt(multi);
+        return;
+    }
+}
